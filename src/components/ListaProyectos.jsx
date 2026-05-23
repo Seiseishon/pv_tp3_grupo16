@@ -26,7 +26,7 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const proyectosFiltrados = buscarProyectos(); 
 
   return (
-    <main>
+    <>
       <h2>Listado de Proyectos</h2>
       
       <div className="buscador">
@@ -62,7 +62,7 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
           </div>
         ))}
       </div>
-    </main>
+    </>
   );
 };
 

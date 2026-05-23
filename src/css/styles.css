@@ -938,12 +938,14 @@ footer {
     color: #4B0082; 
     margin-bottom: 15px;
     font-weight: 800;
+    text-align: center;
 }
 
 .tags-contenedor {
     display: flex;
     gap: 15px;
     margin-bottom: 25px;
+    justify-content: center;
 }
 
 .tag-detalle {

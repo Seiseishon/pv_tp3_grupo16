@@ -4,12 +4,13 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ListaProyectos from "./components/ListaProyectos";
 
+import DetalleOpenMarket from "./components/OpenMarket";
 import DetalleMercadoLiebre from "./components/MercadoLiebre";
 import DetallePeliculas from "./components/DetallePeliculas";
 import DetalleClima from "./components/DetalleClima";
 
 function App() {
-  
+
   const [proyectoActivo, setProyectoActivo] = useState(0);
 
   const volverALista = () => setProyectoActivo(0);
@@ -22,6 +23,10 @@ function App() {
       <main>
         {proyectoActivo === 0 && (
           <ListaProyectos alSeleccionarProyecto={setProyectoActivo} />
+        )}
+
+        {proyectoActivo === 1 && (
+          <DetalleOpenMarket alVolver={volverALista} />
         )}
 
         {proyectoActivo === 2 && (
