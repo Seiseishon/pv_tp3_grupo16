@@ -9,8 +9,9 @@ import DetalleMercadoLiebre from "./components/MercadoLiebre";
 import DetallePeliculas from "./components/DetallePeliculas";
 import DetalleClima from "./components/DetalleClima";
 
-function App() {
+import "./css/styles.css"; 
 
+function App() {
   const [proyectoActivo, setProyectoActivo] = useState(0);
 
   const volverALista = () => setProyectoActivo(0);
@@ -33,12 +34,25 @@ function App() {
           <DetalleMercadoLiebre alVolver={volverALista} />
         )}
 
-        {proyectoActivo === 3 && <DetallePeliculas alVolver={volverALista} />}
+        {proyectoActivo === 3 && (
+          <DetallePeliculas alVolver={volverALista} />
+        )}
 
-        {proyectoActivo === 4 && <DetalleClima alVolver={volverALista} />}
+        {proyectoActivo === 4 && (
+          <DetalleClima alVolver={volverALista} />
+        )}
 
         {proyectoActivo === 5 && (
-          <DetalleEspejoMagico alVolver={volverALista} />
+          <div style={{ padding: "40px", textAlign: "center", background: "#fff", borderRadius: "8px", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+            <h2>Espejo Mágico</h2>
+            <p style={{ margin: "20px 0", color: "#666" }}>El detalle de este proyecto estará disponible en la próxima etapa.</p>
+            <button 
+              onClick={volverALista}
+              style={{ backgroundColor: "#8A2BE2", color: "white", padding: "10px 20px", border: "none", borderRadius: "8px", cursor: "pointer", fontWeight: "bold" }}
+            >
+              Volver al Listado
+            </button>
+          </div>
         )}
       </main>
 

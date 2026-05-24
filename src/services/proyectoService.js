@@ -14,13 +14,13 @@ const proyectoService = (() => {
 
     const eliminarProyecto = id => proyectos = proyectos.filter(p => p.id !== id);
 
-    const buscarProyectos = txt => proyectos.filter(p => p.titulo.toLowerCase().includes(txt.toLowerCase()));
+    const buscarProyecto = txt => proyectos.filter(p => p.titulo.toLowerCase().includes(txt.toLowerCase()));
 
-    return {
+   return {
         obtenerProyectos,
         agregarProyecto,
         eliminarProyecto,
-        buscarProyectos
+        buscarProyecto
     };
 
 })();
