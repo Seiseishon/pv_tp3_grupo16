@@ -1,17 +1,55 @@
-import Header from './components/Header';
-import Nav from './components/Nav';
-import ListaProyectos from './components/ListaProyectos';
-import Footer from './components/Footer';
-import './css/styles.css'; 
+import { useState } from "react";
+import Header from "./components/Header";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import ListaProyectos from "./components/ListaProyectos";
+
+import DetalleOpenMarket from "./components/OpenMarket";
+import DetalleMercadoLiebre from "./components/MercadoLiebre";
+import DetallePeliculas from "./components/DetallePeliculas";
+import DetalleClima from "./components/DetalleClima";
+import EspejoMagico from "./components/EspejoMagico"
+
+import "./css/styles.css"; 
 
 function App() {
+  const [proyectoActivo, setProyectoActivo] = useState(0);
+
+  const volverALista = () => setProyectoActivo(0);
+
   return (
-    <>
+    <div className="app-container">
       <Header />
       <Nav />
-      <ListaProyectos />
+
+      <main>
+        {proyectoActivo === 0 && (
+          <ListaProyectos alSeleccionarProyecto={setProyectoActivo} />
+        )}
+
+        {proyectoActivo === 1 && (
+          <DetalleOpenMarket alVolver={volverALista} />
+        )}
+
+        {proyectoActivo === 2 && (
+          <DetalleMercadoLiebre alVolver={volverALista} />
+        )}
+
+        {proyectoActivo === 3 && (
+          <DetallePeliculas alVolver={volverALista} />
+        )}
+
+        {proyectoActivo === 4 && (
+          <DetalleClima alVolver={volverALista} />
+        )}
+
+        {proyectoActivo === 5 && (
+          <EspejoMagico alVolver={volverALista}/>
+        )}
+      </main>
+
       <Footer />
-    </>
+    </div>
   );
 }
 
