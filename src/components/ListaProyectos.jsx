@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import proyectoService from '../services/proyectoService';
+import ProyectoCard from './ProyectoCard';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
@@ -90,25 +91,12 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
       <div className="contenedor-proyectos">
         {proyectos.map((proyecto) => (
-          <div className="card-proyecto" key={proyecto.id}>
-            <h3>{proyecto.titulo}</h3>
-            <p><strong>Categoría:</strong> {proyecto.categoria}</p>
-            <p><strong>Estado:</strong> {proyecto.estado}</p>
-            
-            <button 
-              onClick={() => alSeleccionarProyecto(proyecto.id)}
-              style={{ backgroundColor: '#8A2BE2', color: 'white', marginBottom: '8px', width: '100%', padding: '10px', border: 'none', borderRadius: '8px' }}
-            >
-              Ver Detalle
-            </button>
-
-            <button 
-              onClick={() => eliminarProyecto(proyecto.id)}
-              style={{ backgroundColor: '#ff4757', color: 'white', width: '100%', padding: '10px', border: 'none', borderRadius: '8px' }}
-            >
-              Eliminar
-            </button>
-          </div>
+          <ProyectoCard 
+            key={proyecto.id} 
+            proyecto={proyecto} 
+            onEliminar={eliminarProyecto} 
+            onVerDetalle={alSeleccionarProyecto}
+          />
         ))}
       </div>
     </>
