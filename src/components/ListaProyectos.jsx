@@ -1,12 +1,25 @@
 import { useState } from 'react';
 import proyectoService from '../services/proyectoService';
+import ProyectoCard from './ProyectoCard';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
 
-  const [titulo, setTitulo] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [estado, setEstado] = useState('Pendiente');
+  const [formulario, setformulario] = useState ({
+    titulo: "",
+    categoria: "",
+    estado: "pendiente"
+  })
+
+  const {titulo, categoria, estado} = formulario;
+
+  const cambioInput = (e) => {
+    const {name,value} = e.target;
+    setformulario ({
+      ...formulario,
+      [name]: value
+    });
+  };
 
   const manejarAgregar = (e) => {
     e.preventDefault(); 
@@ -15,17 +28,19 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
     const nuevoProyecto = {
       id: Date.now(), 
-      titulo: titulo,
-      categoria: categoria,
-      estado: estado
+      titulo,
+      categoria,
+      estado
     };
 
     proyectoService.agregarProyecto(nuevoProyecto); 
     setProyectos(proyectoService.obtenerProyectos()); 
 
-    setTitulo('');
-    setCategoria('');
-    setEstado('Pendiente');
+    setformulario ({
+      titulo: "",
+      categoria: "",
+      estado: "Pendiente"
+    })
   };
 
   const eliminarProyecto = (id) => {
@@ -51,21 +66,24 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
         <form onSubmit={manejarAgregar} className="form-agregar">
           <input 
             type="text" 
+            name="titulo"
             placeholder="Título" 
             value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
+            onChange={cambioInput}
             className="input-formulario"
           />
           <input 
             type="text" 
+            name="categoria"
             placeholder="Categoría" 
             value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
+            onChange={cambioInput}
             className="input-formulario"
           />
           <select 
+            name="estado"
             value={estado} 
-            onChange={(e) => setEstado(e.target.value)}
+            onChange={cambioInput}
             className="select-formulario"
           >
             <option value="Pendiente">Pendiente</option>
@@ -90,25 +108,12 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
       <div className="contenedor-proyectos">
         {proyectos.map((proyecto) => (
-          <div className="card-proyecto" key={proyecto.id}>
-            <h3>{proyecto.titulo}</h3>
-            <p><strong>Categoría:</strong> {proyecto.categoria}</p>
-            <p><strong>Estado:</strong> {proyecto.estado}</p>
-            
-            <button 
-              onClick={() => alSeleccionarProyecto(proyecto.id)}
-              style={{ backgroundColor: '#8A2BE2', color: 'white', marginBottom: '8px', width: '100%', padding: '10px', border: 'none', borderRadius: '8px' }}
-            >
-              Ver Detalle
-            </button>
-
-            <button 
-              onClick={() => eliminarProyecto(proyecto.id)}
-              style={{ backgroundColor: '#ff4757', color: 'white', width: '100%', padding: '10px', border: 'none', borderRadius: '8px' }}
-            >
-              Eliminar
-            </button>
-          </div>
+          <ProyectoCard 
+            key={proyecto.id} 
+            proyecto={proyecto} 
+            onEliminar={eliminarProyecto} 
+            onVerDetalle={alSeleccionarProyecto}
+          />
         ))}
       </div>
     </>
