@@ -5,9 +5,21 @@ import ProyectoCard from './ProyectoCard';
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
 
-  const [titulo, setTitulo] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [estado, setEstado] = useState('Pendiente');
+  const [formulario, setformulario] = useState ({
+    titulo: "",
+    categoria: "",
+    estado: "pendiente"
+  })
+
+  const {titulo, categoria, estado} = formulario;
+
+  const cambioInput = (e) => {
+    const {name,value} = e.target;
+    setformulario ({
+      ...formulario,
+      [name]: value
+    });
+  };
 
   const manejarAgregar = (e) => {
     e.preventDefault(); 
@@ -16,17 +28,19 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
     const nuevoProyecto = {
       id: Date.now(), 
-      titulo: titulo,
-      categoria: categoria,
-      estado: estado
+      titulo,
+      categoria,
+      estado
     };
 
     proyectoService.agregarProyecto(nuevoProyecto); 
     setProyectos(proyectoService.obtenerProyectos()); 
 
-    setTitulo('');
-    setCategoria('');
-    setEstado('Pendiente');
+    setformulario ({
+      titulo: "",
+      categoria: "",
+      estado: "Pendiente"
+    })
   };
 
   const eliminarProyecto = (id) => {
@@ -52,21 +66,24 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
         <form onSubmit={manejarAgregar} className="form-agregar">
           <input 
             type="text" 
+            name="titulo"
             placeholder="Título" 
             value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
+            onChange={cambioInput}
             className="input-formulario"
           />
           <input 
             type="text" 
+            name="categoria"
             placeholder="Categoría" 
             value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
+            onChange={cambioInput}
             className="input-formulario"
           />
           <select 
+            name="estado"
             value={estado} 
-            onChange={(e) => setEstado(e.target.value)}
+            onChange={cambioInput}
             className="select-formulario"
           >
             <option value="Pendiente">Pendiente</option>
