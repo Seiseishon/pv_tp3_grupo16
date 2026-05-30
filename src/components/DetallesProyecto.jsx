@@ -1,38 +1,43 @@
 import React from 'react';
+import Boton from './Boton';
 
-// Recibe  props el objeto "proyecto" completo y la función "alVolver"
-const DetalleProyecto = ({ proyecto, alVolver }) => {
+const DetallesProyecto = ({ proyecto, alVolver }) => {
   
-  // 1. DESESTRUCTURACIÓN
+  if (!proyecto) {
+    return <div className="detalle-proyecto-page"><p>Cargando datos del proyecto...</p></div>;
+  }
+
   const { 
     titulo, 
     categoria, 
-    estado, 
+    estado,
+    imagen,
     descripcionExtendida, 
     descripcionExtendida2, 
+    tecnologias,
+    funcionalidades,
     links, 
     equipo 
   } = proyecto;
 
+  const desc1 = descripcionExtendida || proyecto.descripcion || "Este proyecto no cuenta con una primera descripción disponible.";
+  const desc2 = descripcionExtendida2 || "";
+
   return (
     <div className="detalle-proyecto-page">
       
-      <button 
-        onClick={alVolver}
-        style={{ 
-          background: '#f0f0f0', 
-          border: '1px solid #ccc', 
-          padding: '8px 15px', 
-          borderRadius: '5px', 
-          cursor: 'pointer', 
-          marginBottom: '20px', 
-          fontWeight: 'bold' 
-        }}
-      >
-        ← Volver al Listado
-      </button>
+      <div style={{ marginBottom: '20px' }}>
+        <Boton alVolver={alVolver}/>
+      </div>
 
       <h2>{titulo}</h2>
+      
+      {imagen && (
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+          <img src={imagen} alt={`Logo de ${titulo}`} style={{ maxWidth: '250px', height: 'auto' }} />
+        </div>
+      )}
+
       <div className="tags-contenedor">
         <span className="tag-detalle categoria">{categoria}</span>
         <span className="tag-detalle estado">{estado}</span>
@@ -41,22 +46,44 @@ const DetalleProyecto = ({ proyecto, alVolver }) => {
       <hr />
 
       <h3>Descripción General</h3>
-      <p>{descripcionExtendida}</p>
-      <p>{descripcionExtendida2}</p>
+      <p style={{ whiteSpace: 'pre-line' }}>{desc1}</p>
+      {desc2 && <p style={{ whiteSpace: 'pre-line' }}>{desc2}</p>}
       
+      {tecnologias && tecnologias.length > 0 && (
+        <>
+          <h3>Tecnologías Aplicadas</h3>
+          <ul className="detalle-lista-tech">
+            {tecnologias.map((tech, index) => (
+              <li key={index}>{tech}</li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {funcionalidades && funcionalidades.length > 0 && (
+        <>
+          <h3>Funcionalidades Clave</h3>
+          <ul className="detalle-lista-key">
+            {funcionalidades.map((func, index) => (
+              <li key={index}>{func}</li>
+            ))}
+          </ul>
+        </>
+      )}
+
       <h3>Recursos del Proyecto</h3>
       <ul className="detalle-lista-tech">
         <li>
-          <strong>Documento PDF / Drive:</strong>{' '}
-          <a href={links?.pdf} target="_blank" rel="noreferrer">
-            Abrir Documentación Oficial
-          </a>
+          <strong>Documento PDF:</strong>{' '}
+          <a href={links?.pdf || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
         </li>
         <li>
           <strong>Repositorio GitHub:</strong>{' '}
-          <a href={links?.github} target="_blank" rel="noreferrer">
-            Ver Código Fuente (Repository)
-          </a>
+          <a href={links?.github || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
+        </li>
+        <li>
+          <strong>Google Drive:</strong>{' '}
+          <a href={links?.drive || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
         </li>
       </ul>
 
@@ -77,4 +104,4 @@ const DetalleProyecto = ({ proyecto, alVolver }) => {
   );
 };
 
-export default DetalleProyecto;
+export default DetallesProyecto;
