@@ -1,6 +1,8 @@
+import style from '../css/Nav.module.css';
+
 const Nav = () => {
   return (
-    <nav>
+    <nav className={style.navHeader}>
       <a href="/">Inicio</a>
       <a href="#">Proyectos</a>
       <a href="#">Perfil</a>

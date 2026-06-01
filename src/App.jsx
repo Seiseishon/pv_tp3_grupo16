@@ -1,4 +1,5 @@
 import { useState } from "react";
+import style from "./css/main.module.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -8,7 +9,6 @@ import DetallesProyecto from "./components/DetallesProyecto";
 
 import proyectoService from "./services/proyectoService"; 
 
-import "./css/styles.css"; 
 
 function App() {
   const [proyectoActivo, setProyectoActivo] = useState(0);
@@ -20,7 +20,7 @@ function App() {
     : null;
 
   return (
-    <div className="app-container">
+    <>
       <Header />
       <Nav />
 
@@ -38,7 +38,7 @@ function App() {
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
 

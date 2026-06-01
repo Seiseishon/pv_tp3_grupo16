@@ -1,0 +1,50 @@
+.navHeader {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 40px;
+}
+
+.navHeader a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    padding-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+.navHeader a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #8A2BE2;
+    transition: width 0.5s ease;
+}
+
+.navHeader a:hover {
+    color: white;
+}
+
+.navHeader a:hover::after {
+    width: 100%;
+}
+
+.navHeader a:active, .proyecto a:active {
+    transform: scale(0.95);
+}
+
+.navHeader a:focus, .proyecto a:focus, select:focus {
+    outline: 2px solid #4B0082;
+    outline-offset: 3px;
+}
+

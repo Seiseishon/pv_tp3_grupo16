@@ -1,58 +1,56 @@
-import React from 'react';
+import style from '../css/DetallesProyecto.module.css';
 import Boton from './Boton';
 
 const DetallesProyecto = ({ proyecto, alVolver }) => {
-  
+
   if (!proyecto) {
     return <div className="detalle-proyecto-page"><p>Cargando datos del proyecto...</p></div>;
   }
 
-  const { 
-    titulo, 
-    categoria, 
+  const {
+    titulo,
+    categoria,
     estado,
     imagen,
-    descripcionExtendida, 
-    descripcionExtendida2, 
+    descripcionExtendida,
+    descripcionExtendida2,
     tecnologias,
     funcionalidades,
-    links, 
-    equipo 
+    links,
+    equipo
   } = proyecto;
 
   const desc1 = descripcionExtendida || proyecto.descripcion || "Este proyecto no cuenta con una primera descripción disponible.";
   const desc2 = descripcionExtendida2 || "";
 
   return (
-    <div className="detalle-proyecto-page">
-      
-      <div style={{ marginBottom: '20px' }}>
-        <Boton alVolver={alVolver}/>
-      </div>
+    <div className={style.detalleProyectoPage}>
 
-      <h2>{titulo}</h2>
-      
+      <Boton alVolver={alVolver} />
+
+      <h2 className={style.tituloH2}>{titulo} - Detalle del Proyecto</h2>
+
       {imagen && (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
-          <img src={imagen} alt={`Logo de ${titulo}`} style={{ maxWidth: '250px', height: 'auto' }} />
+        <div className={style.contenedorImg}>
+          <img className={style.imgProyecto} src={imagen} alt={`Logo de ${titulo}`} />
         </div>
       )}
 
-      <div className="tags-contenedor">
-        <span className="tag-detalle categoria">{categoria}</span>
-        <span className="tag-detalle estado">{estado}</span>
+      <div className={style.tagsContenedor}>
+        <span className={style.tagDetalle, style.categoria}>{categoria}</span>
+        <span className={style.tagDetalle, style.estado}>{estado}</span>
       </div>
-      
-      <hr />
 
-      <h3>Descripción General</h3>
-      <p style={{ whiteSpace: 'pre-line' }}>{desc1}</p>
-      {desc2 && <p style={{ whiteSpace: 'pre-line' }}>{desc2}</p>}
-      
+      <hr className={style.linea} />
+
+      <h3 className={style.tituloH3}>Descripción General</h3>
+      <p className={style.parrafoDetalle}>{desc1}</p>
+      {desc2 && <p className={style.parrafoDetalle}>{desc2}</p>}
+
       {tecnologias && tecnologias.length > 0 && (
         <>
-          <h3>Tecnologías Aplicadas</h3>
-          <ul className="detalle-lista-tech">
+          <h3 className={style.tituloH3}>Tecnologías Aplicadas</h3>
+          <ul className={style.detalleListaTech}>
             {tecnologias.map((tech, index) => (
               <li key={index}>{tech}</li>
             ))}
@@ -62,8 +60,8 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
 
       {funcionalidades && funcionalidades.length > 0 && (
         <>
-          <h3>Funcionalidades Clave</h3>
-          <ul className="detalle-lista-key">
+          <h3 className={style.tituloH3}>Funcionalidades Clave</h3>
+          <ul className={style.detalleListaKey}>
             {funcionalidades.map((func, index) => (
               <li key={index}>{func}</li>
             ))}
@@ -71,8 +69,8 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </>
       )}
 
-      <h3>Recursos del Proyecto</h3>
-      <ul className="detalle-lista-tech">
+      <h3 className={style.tituloH3}>Recursos del Proyecto</h3>
+      <ul className={style.detalleListaTech}>
         <li>
           <strong>Documento PDF:</strong>{' '}
           <a href={links?.pdf || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
@@ -87,12 +85,12 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </li>
       </ul>
 
-      <h3>Equipo de Trabajo</h3>
-      <ul className="detalle-lista-key">
+      <h3 className={style.tituloH3}>Equipo de Trabajo</h3>
+      <ul className={style.detalleListaKey}>
         {equipo && equipo.length > 0 ? (
           equipo.map((integrante, index) => (
             <li key={index}>
-              <strong>{integrante.nombre}</strong> — <span style={{color: '#666'}}>{integrante.rol}</span>
+              <strong>{integrante.nombre}</strong> — <span style={{ color: '#666' }}>{integrante.rol}</span>
             </li>
           ))
         ) : (
