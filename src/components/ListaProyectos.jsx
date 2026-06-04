@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
+import { useEffect } from 'react';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
@@ -15,6 +16,17 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
     drive: "",          
     equipoNombre: ""   
   })
+
+  const [fechaRegistro, setFechaRegistro] = useState(null);
+
+  useEffect(() => {
+    const fechaActual = new Date();
+    
+    setFechaRegistro(fechaActual);
+    
+    console.log("Se detectó un cambio en proyectos. Fecha capturada:", fechaActual);
+    
+  }, [proyectos]);
 
   const {titulo, categoria, estado, descripcionExtendida, github, pdf, drive, equipoNombre} = formulario;
 
