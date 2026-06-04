@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
+  const [proyectosFiltrados, setProyectosFiltrados] = useState(proyectoService.obtenerProyectos());
 
   const [formulario, setformulario] = useState ({
     titulo: "",
@@ -63,6 +64,7 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
     proyectoService.agregarProyecto(nuevoProyecto); 
     setProyectos(proyectoService.obtenerProyectos()); 
+    setProyectosFiltrados(proyectoService.obtenerProyectos());
 
     setformulario ({
       titulo: "", categoria: "", estado: "Pendiente", 
@@ -73,14 +75,15 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const eliminarProyecto = (id) => {
     proyectoService.eliminarProyecto(id);
     setProyectos(proyectoService.obtenerProyectos());
+    setProyectosFiltrados(proyectoService.obtenerProyectos());
   }
   
   const manejarBusqueda = (e) => {
     const texto = e.target.value;
     if (texto === '') {
-      setProyectos(proyectoService.obtenerProyectos());
+      setProyectosFiltrados(proyectoService.obtenerProyectos());
     } else {
-      setProyectos(proyectoService.buscarProyecto(texto));
+      setProyectosFiltrados(proyectoService.buscarProyectos(texto));
     }
   };
 
@@ -158,7 +161,7 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
       </div>
 
       <div className="contenedor-proyectos">
-        {proyectos.map((proyecto) => (
+        {proyectosFiltrados.map((proyecto) => (
           <ProyectoCard 
             key={proyecto.id} 
             proyecto={proyecto} 
