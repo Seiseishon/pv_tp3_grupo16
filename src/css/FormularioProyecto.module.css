@@ -1,0 +1,74 @@
+.agregarProyecto {
+    background-color: #fbf8ff;
+    padding: 25px;
+    border-radius: '12px';
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.04);
+    border: 1px solid #ede7f6;
+    margin-bottom: 40px;
+}
+
+.tituloH3 {
+    margin-top: 0;
+    color: #4a148c;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenedorCampos {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.campos {
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.campoTarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.camposLinks {
+    flex: 1;
+    min-width: 130px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btnAgregar {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+    transition: opacity 0.2s ease;
+
+}
+
+.btnAgregar:hover {
+  opacity: 0.85;
+}

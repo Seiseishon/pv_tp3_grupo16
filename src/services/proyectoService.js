@@ -13,7 +13,7 @@ const proyectoService = (() => {
             categoria: "Aplicación Web", 
             estado: "Finalizado",
             imagen: imgOpenMarket,
-            descripcion: "Open Market es un proyecto de e-commerce desarrollado con HTML, CSS y JavaScript, inspirado en plataformas modernas de comercio electrónico.\n\nSu objetivo es ofrecer una experiencia interactiva para la visualización y exploración de productos, aplicando conceptos de diseño web, estructura responsiva y manipulación dinámica de contenido.",
+            descripcion: "Open Market es una plataforma de e-commerce desarrollada con HTML, CSS y JavaScript. Su diseño, centrado en tonos morados, busca ofrecer una experiencia visual moderna y una navegación fluida para que los usuarios exploren productos fácilmente.\n\nLa interfaz cuenta con diseño responsive mediante Flexbox y manipulación dinámica del DOM. Incorpora un carrito de compras interactivo, filtros de búsqueda y simulación de inicio de sesión, demostrando un uso avanzado de lógica del lado del cliente.",
             tecnologias: [
                 "HTML5 & CSS3: Utilizados para la estructura visual del sitio, diseño responsivo y maquetación de las secciones de productos y navegación.",
                 "JavaScript: Implementación de funcionalidades dinámicas como interacción con botones, visualización de productos y manipulación del DOM.",
@@ -28,10 +28,10 @@ const proyectoService = (() => {
                 "Simulación de login.",
                 "Catálogo dinámico."
             ],
-            recursos: {
+            links: {
                 pdf: "https://ejemplo.com/doc-openmarket.pdf",
                 drive: "https://drive.google.com/openmarket",
-                github: "https://github.com/usuario/open-market"
+                github: "https://github.com/Seiseishon/grupo_9_Tienda"
             },
             equipo: [
                 { nombre: "Mauricio Maximiliano Villarreal", rol: "Líder" },
@@ -45,7 +45,7 @@ const proyectoService = (() => {
             categoria: "Aplicación Web", 
             estado: "Finalizado",
             imagen: imgMercadoLiebre,
-            descripcion: "Este proyecto consiste en una réplica funcional de una plataforma de comercio electrónico (e-commerce) inspirada en Mercado Libre.\n\nEstá orientada a la simulación de compra y venta de productos tecnológicos, artículos del hogar y de indumentaria.",
+            descripcion: "Este proyecto es una réplica funcional de la plataforma Mercado Libre, orientada a la simulación de compra y venta de productos. Utiliza CSS Grid y Flexbox para lograr un catálogo totalmente adaptable a cualquier dispositivo móvil o de escritorio.\n\nLa lógica interactiva se implementó con JavaScript Vanilla, gestionando el carrito y validando formularios en tiempo real. Además, incluye una etapa de integración con Node.js y Express para simular el enrutamiento de un servidor real.",
             tecnologias: [
                 "HTML5 & CSS3 Avanzado: Uso de Flexbox y CSS Grid para diseñar toda la botonera y el catálogo de productos adaptables a celulares.",
                 "JavaScript Vanilla: Toda la lógica interactiva para el manejo del carrito de compras y cálculo de precios totales.",
@@ -59,7 +59,7 @@ const proyectoService = (() => {
             recursos: {
                 pdf: "https://ejemplo.com/doc-mercadoliebre.pdf",
                 drive: "https://drive.google.com/mercadoliebre",
-                github: "https://github.com/usuario/mercado-liebre"
+                github: "https://github.com/Seiseishon/Mercado-Liebre"
             },
             equipo: [
                 { nombre: "Nelson Fabian Ramos", rol: "Líder" },
@@ -72,7 +72,7 @@ const proyectoService = (() => {
             categoria: "Aplicación Web", 
             estado: "Finalizado",
             imagen: imgPeliculas,
-            descripcion: "Una plataforma de catálogo cinematográfico interactivo diseñada para que los amantes del cine exploren tendencias y organicen sus títulos favoritos.\n\nEl desarrollo se centró en consumir una API externa de películas y estructurar el DOM para mostrar los resultados de forma dinámica en la interfaz.",
+            descripcion: "Esta plataforma interactiva permite a los amantes del cine explorar tendencias y organizar sus películas favoritas. Se centra en el consumo eficiente de la API externa The Movie Database (TMDB) mediante asincronismo con Async/Await y Fetch.\n\nEl proyecto destaca por mostrar detalles y tráilers de YouTube en ventanas modales dinámicas. También incluye un sistema de almacenamiento en LocalStorage, permitiendo a los usuarios guardar listas personalizadas de manera persistente.",
             tecnologias: [
                 "Consumo de API Externa (The Movie Database - TMDB)",
                 "Asincronismo puro mediante Async/Await y Fetch",
@@ -86,7 +86,7 @@ const proyectoService = (() => {
             recursos: {
                 pdf: "https://ejemplo.com/doc-peliculas.pdf",
                 drive: "https://drive.google.com/peliculas",
-                github: "https://github.com/usuario/app-peliculas"
+                github: "https://github.com/Seiseishon/app-peliculas-reactjs"
             },
             equipo: [
                 { nombre: "Noel Silvio Raul Chiliguay", rol: "Líder" },
@@ -99,7 +99,7 @@ const proyectoService = (() => {
             categoria: "Aplicación Web", 
             estado: "Finalizado",
             imagen: imgClima,
-            descripcion: "Dashboard meteorológico minimalista que proporciona alertas climáticas y pronósticos extendidos para cualquier coordenadas geográfica del planeta.\n\nEl enfoque principal fue la integración de geolocalización nativa para brindar información climatológica en tiempo real según la ubicación actual del usuario.",
+            descripcion: "Se trata de un dashboard meteorológico minimalista que brinda pronósticos y alertas climáticas. Su principal atractivo es la integración de la API de OpenWeatherMap combinada directamente con la geolocalización nativa del navegador del usuario.\n\nLa interfaz reacciona a las condiciones ambientales cambiando el fondo de pantalla automáticamente (por ejemplo, mostrando lluvia o cielo despejado). Además, exhibe métricas precisas como velocidad del viento, humedad y sensación térmica.",
             tecnologias: [
                 "Integración con la API de OpenWeatherMap",
                 "Geolocalización nativa del navegador del usuario",
@@ -113,7 +113,7 @@ const proyectoService = (() => {
             recursos: {
                 pdf: "https://ejemplo.com/doc-clima.pdf",
                 drive: "https://drive.google.com/clima",
-                github: "https://github.com/usuario/app-clima"
+                github: "https://github.com/Seiseishon/aplicacion-clima-react"
             },
             equipo: [
                 { nombre: "Franco Gabriel Sanchez Ayama", rol: "Líder" },
@@ -126,7 +126,7 @@ const proyectoService = (() => {
             categoria: "Juego", 
             estado: "Finalizado",
             imagen: imgEspejo,
-            descripcion: "Espejo Mágico es un juego web interactivo desarrollado en React utilizando HTML, CSS y JavaScript.\n\nEl objetivo principal del proyecto es ofrecer una experiencia lúdica y visualmente atractiva basada en la lógica y la simetría, aplicando conceptos avanzados de manejo de estado en tiempo real, renderizado condicional y un diseño responsivo que garantiza una excelente experiencia de usuario.",
+            descripcion: "Espejo Mágico es un juego web interactivo desarrollado en React que pone a prueba la lógica y simetría espacial del jugador. Su mecánica principal exige un control riguroso de estados en tiempo real y el uso eficiente de Hooks.\n\nA nivel visual, cuenta con animaciones fluidas maquetadas con HTML5 y CSS3 para mejorar la experiencia lúdica. Su diseño responsivo garantiza que el tablero de juego se adapte perfectamente a pantallas de celulares, tablets y computadoras.",
             tecnologias: [
                 "React & JavaScript (ES6): Implementación de la lógica del juego mediante el uso de hooks, gestión de eventos dinámicos y manipulación eficiente del árbol de componentes.",
                 "HTML5 & CSS3: Maquetación estructural del tablero de juego y aplicaciones de estilos personalizados, incluyendo transiciones.",
@@ -140,10 +140,10 @@ const proyectoService = (() => {
                 "Sistema adaptable (Responsive Design) para cualquier dispositivo.",
                 "Integración fluida con el panel principal de proyectos."
             ],
-            recursos: {
+            links: {
                 pdf: "https://ejemplo.com/doc-espejo.pdf",
                 drive: "https://drive.google.com/espejo",
-                github: "https://github.com/usuario/espejo-magico"
+                github: "https://github.com/Seiseishon/Espejo-Magico"
             },
             equipo: [
                 { nombre: "Sergio Saul Alex Soza", rol: "Líder" },

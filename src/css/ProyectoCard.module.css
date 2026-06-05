@@ -1,0 +1,70 @@
+.cardProyecto {
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 14px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.cardProyecto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(138, 43, 226, 0.1);
+    border-color: #efe8ff;
+}
+
+.tituloH3 {
+    font-size: 1.3rem;
+    color: #222;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.parrafoCard {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.cardProyecto button {
+    margin-top: 15px;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.5s, transform 0.1s;
+}
+
+.btnDetalle {
+    background-color: #8A2BE2;
+    color: white;
+    margin-bottom: 8px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+}
+
+.btnDetalle:hover {
+    background-color: #8100fa;
+    transform: scale(1.02);
+}
+
+.btnEliminar {
+    background-color: #ff4757;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+}
+
+.btnEliminar:hover {
+    background-color: #ff0000;
+    transform: scale(1.02);
+}

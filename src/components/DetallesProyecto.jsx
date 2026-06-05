@@ -1,71 +1,96 @@
-import React from 'react';
+import style from '../css/DetallesProyecto.module.css';
+import Boton from './Boton';
 
-// Recibe  props el objeto "proyecto" completo y la función "alVolver"
-const DetalleProyecto = ({ proyecto, alVolver }) => {
-  
-  // 1. DESESTRUCTURACIÓN
-  const { 
-    titulo, 
-    categoria, 
-    estado, 
-    descripcionExtendida, 
-    descripcionExtendida2, 
-    links, 
-    equipo 
+const DetallesProyecto = ({ proyecto, alVolver }) => {
+
+  if (!proyecto) {
+    return <div className="detalle-proyecto-page"><p>Cargando datos del proyecto...</p></div>;
+  }
+
+  const {
+    titulo,
+    categoria,
+    estado,
+    imagen,
+    descripcionExtendida,
+    descripcionExtendida2,
+    tecnologias,
+    funcionalidades,
+    links,
+    equipo
   } = proyecto;
 
+  const desc1 = descripcionExtendida || proyecto.descripcion || "Este proyecto no cuenta con una primera descripción disponible.";
+  const desc2 = descripcionExtendida2 || "";
+
   return (
-    <div className="detalle-proyecto-page">
-      
-      <button 
-        onClick={alVolver}
-        style={{ 
-          background: '#f0f0f0', 
-          border: '1px solid #ccc', 
-          padding: '8px 15px', 
-          borderRadius: '5px', 
-          cursor: 'pointer', 
-          marginBottom: '20px', 
-          fontWeight: 'bold' 
-        }}
-      >
-        ← Volver al Listado
-      </button>
+    <div className={style.detalleProyectoPage}>
 
-      <h2>{titulo}</h2>
-      <div className="tags-contenedor">
-        <span className="tag-detalle categoria">{categoria}</span>
-        <span className="tag-detalle estado">{estado}</span>
+      <Boton alVolver={alVolver} />
+
+      <h2 className={style.tituloH2}>{titulo} - Detalle del Proyecto</h2>
+
+      {imagen && (
+        <div className={style.contenedorImg}>
+          <img className={style.imgProyecto} src={imagen} alt={`Logo de ${titulo}`} />
+        </div>
+      )}
+
+      <div className={style.tagsContenedor}>
+        <span className={style.tagDetalle, style.categoria}>{categoria}</span>
+        <span className={style.tagDetalle, style.estado}>{estado}</span>
       </div>
-      
-      <hr />
 
-      <h3>Descripción General</h3>
-      <p>{descripcionExtendida}</p>
-      <p>{descripcionExtendida2}</p>
-      
-      <h3>Recursos del Proyecto</h3>
-      <ul className="detalle-lista-tech">
+      <hr className={style.linea} />
+
+      <h3 className={style.tituloH3}>Descripción General</h3>
+      <p className={style.parrafoDetalle}>{desc1}</p>
+      {desc2 && <p className={style.parrafoDetalle}>{desc2}</p>}
+
+      {tecnologias && tecnologias.length > 0 && (
+        <>
+          <h3 className={style.tituloH3}>Tecnologías Aplicadas</h3>
+          <ul className={style.detalleListaTech}>
+            {tecnologias.map((tech, index) => (
+              <li key={index}>{tech}</li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      {funcionalidades && funcionalidades.length > 0 && (
+        <>
+          <h3 className={style.tituloH3}>Funcionalidades Clave</h3>
+          <ul className={style.detalleListaKey}>
+            {funcionalidades.map((func, index) => (
+              <li key={index}>{func}</li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      <h3 className={style.tituloH3}>Recursos del Proyecto</h3>
+      <ul className={style.detalleListaTech}>
         <li>
-          <strong>Documento PDF / Drive:</strong>{' '}
-          <a href={links?.pdf} target="_blank" rel="noreferrer">
-            Abrir Documentación Oficial
-          </a>
+          <strong>Documento PDF:</strong>{' '}
+          <a href={links?.pdf || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
         </li>
         <li>
           <strong>Repositorio GitHub:</strong>{' '}
-          <a href={links?.github} target="_blank" rel="noreferrer">
-            Ver Código Fuente (Repository)
-          </a>
+          <a href={links?.github || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
+        </li>
+        <li>
+          <strong>Google Drive:</strong>{' '}
+          <a href={links?.drive || "#"} target="_blank" rel="noreferrer">Ver recurso</a>
         </li>
       </ul>
 
-      <h3>Equipo de Trabajo</h3>
-      <ul className="detalle-lista-key">
+      <h3 className={style.tituloH3}>Equipo de Trabajo</h3>
+      <ul className={style.detalleListaKey}>
         {equipo && equipo.length > 0 ? (
           equipo.map((integrante, index) => (
             <li key={index}>
-              <strong>{integrante.nombre}</strong> — <span style={{color: '#666'}}>{integrante.rol}</span>
+              <strong>{integrante.nombre}</strong> — <span style={{ color: '#666' }}>{integrante.rol}</span>
             </li>
           ))
         ) : (
@@ -77,4 +102,4 @@ const DetalleProyecto = ({ proyecto, alVolver }) => {
   );
 };
 
-export default DetalleProyecto;
+export default DetallesProyecto;

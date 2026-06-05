@@ -1,0 +1,124 @@
+.detalleProyectoPage {
+    background-color: #ffffff;
+    padding: 10px 0;
+    color: #333333 !important;
+}
+
+.tituloH2 {
+    font-size: 2.2rem;
+    color: #4B0082;
+    margin-bottom: 15px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.tagsContenedor {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.categoria, .estado {
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.categoria {
+    background-color: #f8f4ff;
+    color: #8A2BE2;
+    border: 1px solid #efe8ff;
+}
+
+.estado {
+    background-color: #e6ffed;
+    color: #1a7f37;
+    border: 1px solid #acf2bd;
+}
+
+.contenedorImg {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.imgProyecto {
+    max-width: 250px;
+    height: auto;
+}
+
+.linea {
+    border: none;
+    height: 1px;
+    background-color: #eaeaea;
+    margin: 25px 0;
+}
+
+.tituloH3 {
+    font-size: 1.3rem;
+    color: #222222;
+    margin: 30px 0 15px 0;
+    font-weight: 700;
+    border-left: 4px solid #8A2BE2;
+    padding-left: 10px;
+}
+
+.parrafoDetalle {
+    color: #444444;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    white-space: pre-line;
+}
+
+.detalleListaTech {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detalleListaTech li {
+    background: #f8f9fa;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    border-left: 4px solid #8A2BE2;
+}
+
+.detalleListaTech li a {
+    text-decoration: none;
+}
+
+.detalleListaKey {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detalleListaKey li {
+    position: relative;
+    padding-left: 30px;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.detalleListaKey li::before {
+    content: "✓";
+    position: absolute;
+    left: 5px;
+    color: #8A2BE2;
+    font-weight: 900;
+    font-size: 1.1rem;
+}

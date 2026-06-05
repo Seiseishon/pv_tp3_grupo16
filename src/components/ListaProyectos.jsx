@@ -1,121 +1,118 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import style from '../css/ListaProyectos.module.css';
 import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
+import FormularioProyecto from './FormularioProyecto';
+import { useRef } from 'react';
+import RegistroActividad from './RegistroActividad';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
+  const [proyectosFiltrados, setProyectosFiltrados] = useState(proyectoService.obtenerProyectos());
 
-  const [formulario, setformulario] = useState ({
-    titulo: "",
-    categoria: "",
-    estado: "pendiente"
-  })
+  const [fechaRegistro, setFechaRegistro] = useState(null);
 
-  const {titulo, categoria, estado} = formulario;
+  const primerRender = useRef(true);
 
-  const cambioInput = (e) => {
-    const {name,value} = e.target;
-    setformulario ({
-      ...formulario,
-      [name]: value
-    });
+  useEffect(() => {
+    if (primerRender.current) {
+      primerRender.current = false;
+      return;
+    }
+    const fechaActual = new Date();
+
+    setFechaRegistro(fechaActual);
+
+    console.log("Se detectó un cambio en proyectos. Fecha capturada:", fechaActual);
+
+  }, [proyectos]);
+
+  const agregarProyecto = (nuevoProyecto) => {
+    proyectoService.agregarProyecto(nuevoProyecto);
+
+    setProyectos(proyectoService.obtenerProyectos());
+    setProyectosFiltrados(proyectoService.obtenerProyectos());
   };
 
   const manejarAgregar = (e) => {
-    e.preventDefault(); 
-    
+    e.preventDefault();
+
     if (titulo.trim() === '' || categoria.trim() === '') return;
 
     const nuevoProyecto = {
-      id: Date.now(), 
+      id: Date.now(),
       titulo,
       categoria,
-      estado
+      estado,
+      imagen: "",
+      descripcionExtendida: descripcionExtendida || "Sin descripción asignada.",
+      descripcionExtendida2: "",
+      tecnologias: ["Tecnología a definir"],
+      funcionalidades: ["Funcionalidad a definir"],
+      links: {
+        pdf: pdf || "",
+        drive: drive || "",
+        github: github || ""
+      },
+      equipo: equipoNombre ? [{ nombre: equipoNombre, rol: "Líder" }] : []
     };
 
-    proyectoService.agregarProyecto(nuevoProyecto); 
-    setProyectos(proyectoService.obtenerProyectos()); 
+    proyectoService.agregarProyecto(nuevoProyecto);
+    setProyectos(proyectoService.obtenerProyectos());
+    setProyectosFiltrados(proyectoService.obtenerProyectos());
 
-    setformulario ({
-      titulo: "",
-      categoria: "",
-      estado: "Pendiente"
+    setformulario({
+      titulo: "", categoria: "", estado: "Pendiente",
+      descripcionExtendida: "", github: "", pdf: "", drive: "", equipoNombre: ""
     })
   };
 
   const eliminarProyecto = (id) => {
     proyectoService.eliminarProyecto(id);
     setProyectos(proyectoService.obtenerProyectos());
+    setProyectosFiltrados(proyectoService.obtenerProyectos());
   }
-  
+
   const manejarBusqueda = (e) => {
     const texto = e.target.value;
     if (texto === '') {
-      setProyectos(proyectoService.obtenerProyectos());
+      setProyectosFiltrados(proyectoService.obtenerProyectos());
     } else {
-      setProyectos(proyectoService.buscarProyecto(texto));
+      setProyectosFiltrados(proyectoService.buscarProyecto(texto));
     }
   };
 
   return (
     <>
-      <h2>Listado de Proyectos</h2>
-      
-      <div className="contenedor-formulario">
-        <h3>Agregar Nuevo Proyecto</h3>
-        <form onSubmit={manejarAgregar} className="form-agregar">
-          <input 
-            type="text" 
-            name="titulo"
-            placeholder="Título" 
-            value={titulo}
-            onChange={cambioInput}
-            className="input-formulario"
-          />
-          <input 
-            type="text" 
-            name="categoria"
-            placeholder="Categoría" 
-            value={categoria}
-            onChange={cambioInput}
-            className="input-formulario"
-          />
-          <select 
-            name="estado"
-            value={estado} 
-            onChange={cambioInput}
-            className="select-formulario"
-          >
-            <option value="Pendiente">Pendiente</option>
-            <option value="En progreso">En progreso</option>
-            <option value="Finalizado">Finalizado</option>
-          </select>
-          <button type="submit" className="btn-agregar">
-            Agregar Proyecto
-          </button>
-        </form>
-      </div>
+      <h2 className={style.tituloProyectos}>Listado de Proyectos</h2>
+
+      <FormularioProyecto onAgregarProyecto={agregarProyecto} />
 
       <hr />
 
-      <div className="buscador" style={{ marginTop: '20px', marginBottom: '20px' }}>
-        <input 
-          type="text" 
-          placeholder="Buscar proyecto por título..." 
+      <div className={style.buscador}>
+        <input
+          className={style.inputBuscador}
+          type="text"
+          placeholder="Buscar proyecto por título..."
           onChange={manejarBusqueda}
         />
       </div>
 
-      <div className="contenedor-proyectos">
+      <div className={style.contenedorProyectos}>
         {proyectos.map((proyecto) => (
-          <ProyectoCard 
-            key={proyecto.id} 
-            proyecto={proyecto} 
-            onEliminar={eliminarProyecto} 
+          <ProyectoCard
+            key={proyecto.id}
+            proyecto={proyecto}
+            onEliminar={eliminarProyecto}
             onVerDetalle={alSeleccionarProyecto}
           />
         ))}
       </div>
+      
+      <hr/>
+
+      {fechaRegistro &&(<RegistroActividad fecha={fechaRegistro}/>)}
     </>
   );
 };

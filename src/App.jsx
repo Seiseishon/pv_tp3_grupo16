@@ -1,55 +1,44 @@
 import { useState } from "react";
+import style from "./css/styles.module.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ListaProyectos from "./components/ListaProyectos";
 
-import DetalleOpenMarket from "./components/OpenMarket";
-import DetalleMercadoLiebre from "./components/MercadoLiebre";
-import DetallePeliculas from "./components/DetallePeliculas";
-import DetalleClima from "./components/DetalleClima";
-import EspejoMagico from "./components/EspejoMagico"
+import DetallesProyecto from "./components/DetallesProyecto";
 
-import "./css/styles.css"; 
+import proyectoService from "./services/proyectoService";
+
 
 function App() {
   const [proyectoActivo, setProyectoActivo] = useState(0);
 
   const volverALista = () => setProyectoActivo(0);
 
+  const proyectoSeleccionado = proyectoActivo !== 0
+    ? proyectoService.obtenerProyectos().find(p => p.id === proyectoActivo)
+    : null;
+
   return (
-    <div className="app-container">
+    <>
       <Header />
       <Nav />
 
-      <main>
+      <main className={style.mainGlobal}>
         {proyectoActivo === 0 && (
           <ListaProyectos alSeleccionarProyecto={setProyectoActivo} />
         )}
 
-        {proyectoActivo === 1 && (
-          <DetalleOpenMarket alVolver={volverALista} />
-        )}
-
-        {proyectoActivo === 2 && (
-          <DetalleMercadoLiebre alVolver={volverALista} />
-        )}
-
-        {proyectoActivo === 3 && (
-          <DetallePeliculas alVolver={volverALista} />
-        )}
-
-        {proyectoActivo === 4 && (
-          <DetalleClima alVolver={volverALista} />
-        )}
-
-        {proyectoActivo === 5 && (
-          <EspejoMagico alVolver={volverALista}/>
+        {proyectoActivo !== 0 && proyectoSeleccionado && (
+          <DetallesProyecto
+            proyecto={proyectoSeleccionado}
+            alVolver={volverALista}
+          />
         )}
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
 
