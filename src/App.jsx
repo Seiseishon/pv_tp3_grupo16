@@ -1,13 +1,13 @@
 import { useState } from "react";
-import style from "./css/main.module.css";
+import style from "./css/styles.module.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import ListaProyectos from "./components/ListaProyectos";
 
-import DetallesProyecto from "./components/DetallesProyecto"; 
+import DetallesProyecto from "./components/DetallesProyecto";
 
-import proyectoService from "./services/proyectoService"; 
+import proyectoService from "./services/proyectoService";
 
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
 
   const volverALista = () => setProyectoActivo(0);
 
-  const proyectoSeleccionado = proyectoActivo !== 0 
-    ? proyectoService.obtenerProyectos().find(p => p.id === proyectoActivo) 
+  const proyectoSeleccionado = proyectoActivo !== 0
+    ? proyectoService.obtenerProyectos().find(p => p.id === proyectoActivo)
     : null;
 
   return (
@@ -24,15 +24,15 @@ function App() {
       <Header />
       <Nav />
 
-      <main>
+      <main className={style.mainGlobal}>
         {proyectoActivo === 0 && (
           <ListaProyectos alSeleccionarProyecto={setProyectoActivo} />
         )}
 
         {proyectoActivo !== 0 && proyectoSeleccionado && (
-          <DetallesProyecto 
-            proyecto={proyectoSeleccionado} 
-            alVolver={volverALista} 
+          <DetallesProyecto
+            proyecto={proyectoSeleccionado}
+            alVolver={volverALista}
           />
         )}
       </main>
