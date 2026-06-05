@@ -3,6 +3,8 @@ import style from '../css/ListaProyectos.module.css';
 import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
 import FormularioProyecto from './FormularioProyecto';
+import { useRef } from 'react';
+import RegistroActividad from './RegistroActividad';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
@@ -10,7 +12,13 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
   const [fechaRegistro, setFechaRegistro] = useState(null);
 
+  const primerRender = useRef(true);
+
   useEffect(() => {
+    if (primerRender.current) {
+      primerRender.current = false;
+      return;
+    }
     const fechaActual = new Date();
 
     setFechaRegistro(fechaActual);
@@ -101,6 +109,10 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
           />
         ))}
       </div>
+      
+      <hr/>
+
+      {fechaRegistro &&(<RegistroActividad fecha={fechaRegistro}/>)}
     </>
   );
 };
