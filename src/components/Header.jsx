@@ -1,16 +1,27 @@
-import style from '../css/Header.module.css';
+import { Container } from 'react-bootstrap';
+import styles from '../css/Header.module.css';
 
 const Header = () => {
   return (
-    <header className={style.headerGlobal}>
-      <div className={style.headerContent}>
-        <h1 id={style.tituloH1}>Gestión de Proyectos y Trabajos UNJUPROYECT</h1>
-        <div className={style.proyectoInfo}>
-          <p>Optimice su flujo de trabajo con nuestra plataforma centralizada de seguimiento académico.</p>
-          <p>Manejado por el Grupo 16 • Cátedra de APU.</p>
+    
+    <header className={`${styles.headerCompact} py-5 mb-4 shadow`}>
+      <Container className="text-center">
+        
+        <div className="mb-3">
+          <i class="fa-regular fa-clipboard" style={{ fontSize: '3.5rem', color: '#8A2BE2' }}></i>
         </div>
 
-      </div>
+        <h1 className="display-5 text-white fw-bold mb-3 mt-2">
+          Gestión de <span className={styles.tituloDestacado}>Proyectos</span>
+        </h1>
+        
+        <p className="lead text-white mb-3 w-75 mx-auto fs-5">
+          Plataforma académica para la visualización y administración de trabajos de Analista Programador Universitario.
+        </p>
+        
+        
+      </Container>
+      
     </header>
   );
 };

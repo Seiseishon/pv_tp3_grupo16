@@ -68,3 +68,24 @@
     background-color: #ff0000;
     transform: scale(1.02);
 }
+
+.efecto-flotante {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.efecto-flotante:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(138, 43, 226, 0.15) !important; 
+}
+
+.boton-morado {
+  background-color: #8A2BE2 !important; 
+  border: none !important;
+  transition: all 0.3s ease; 
+}
+
+.boton-morado:hover {
+  background-color: #7322BD !important; 
+  transform: translateY(-3px); 
+  box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4); 
+}

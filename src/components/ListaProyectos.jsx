@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import style from '../css/ListaProyectos.module.css';
 import proyectoService from '../services/proyectoService';
 import ProyectoCard from './ProyectoCard';
 import FormularioProyecto from './FormularioProyecto';
-import { useRef } from 'react';
 import RegistroActividad from './RegistroActividad';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const ListaProyectos = ({ alSeleccionarProyecto }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
@@ -32,39 +32,6 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
     setProyectos(proyectoService.obtenerProyectos());
     setProyectosFiltrados(proyectoService.obtenerProyectos());
-  };
-
-  const manejarAgregar = (e) => {
-    e.preventDefault();
-
-    if (titulo.trim() === '' || categoria.trim() === '') return;
-
-    const nuevoProyecto = {
-      id: Date.now(),
-      titulo,
-      categoria,
-      estado,
-      imagen: "",
-      descripcionExtendida: descripcionExtendida || "Sin descripción asignada.",
-      descripcionExtendida2: "",
-      tecnologias: ["Tecnología a definir"],
-      funcionalidades: ["Funcionalidad a definir"],
-      links: {
-        pdf: pdf || "",
-        drive: drive || "",
-        github: github || ""
-      },
-      equipo: equipoNombre ? [{ nombre: equipoNombre, rol: "Líder" }] : []
-    };
-
-    proyectoService.agregarProyecto(nuevoProyecto);
-    setProyectos(proyectoService.obtenerProyectos());
-    setProyectosFiltrados(proyectoService.obtenerProyectos());
-
-    setformulario({
-      titulo: "", categoria: "", estado: "Pendiente",
-      descripcionExtendida: "", github: "", pdf: "", drive: "", equipoNombre: ""
-    })
   };
 
   const eliminarProyecto = (id) => {
@@ -99,20 +66,23 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
         />
       </div>
 
-      <div className={style.contenedorProyectos}>
-        {proyectos.map((proyecto) => (
-          <ProyectoCard
-            key={proyecto.id}
-            proyecto={proyecto}
-            onEliminar={eliminarProyecto}
-            onVerDetalle={alSeleccionarProyecto}
-          />
-        ))}
-      </div>
+      <Container className="mt-4 mb-5">
+        <Row className="g-4">
+          {proyectosFiltrados.map((proyecto) => (
+            <Col key={proyecto.id} xs={12} md={6} lg={4}>
+              <ProyectoCard
+                proyecto={proyecto}
+                onEliminar={eliminarProyecto}
+                onVerDetalle={alSeleccionarProyecto}
+              />
+            </Col>
+          ))}
+        </Row>
+      </Container>
       
       <hr/>
 
-      {fechaRegistro &&(<RegistroActividad fecha={fechaRegistro}/>)}
+      {fechaRegistro && (<RegistroActividad fecha={fechaRegistro}/>)}
     </>
   );
 };
