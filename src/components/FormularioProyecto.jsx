@@ -1,106 +1,169 @@
-import { useState } from "react";
-import style from '../css/FormularioProyecto.module.css';
-import proyectoService from "../services/proyectoService";
+import { useState } from 'react';
+import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 const FormularioProyecto = ({ onAgregarProyecto }) => {
-    const [formulario, setformulario] = useState({
-        titulo: "",
-        categoria: "",
-        estado: "Pendiente",
-        descripcionExtendida: "",
-        github: "",
-        pdf: "",
-        drive: "",
-        equipoNombre: ""
+  const [formulario, setFormulario] = useState({
+    titulo: '',
+    categoria: '',
+    estado: 'Pendiente',
+    descripcion: '',
+    github: '',
+    pdf: '',
+    drive: '',
+    equipoNombre: ''
+  });
+
+  const manejarCambio = (e) => {
+    setFormulario({ ...formulario, [e.target.name]: e.target.value });
+  };
+
+  const manejarEnvio = (e) => {
+    e.preventDefault();
+    
+    if (!formulario.titulo.trim() || !formulario.categoria.trim()) return;
+
+    const nuevoProyecto = {
+      id: Date.now(),
+      titulo: formulario.titulo,
+      categoria: formulario.categoria,
+      estado: formulario.estado,
+      descripcion: formulario.descripcion,
+      links: {
+        github: formulario.github,
+        pdf: formulario.pdf,
+        drive: formulario.drive
+      },
+      equipo: formulario.equipoNombre ? [{ nombre: formulario.equipoNombre, rol: "Líder" }] : []
+    };
+
+    onAgregarProyecto(nuevoProyecto);
+
+    setFormulario({
+      titulo: '', categoria: '', estado: 'Pendiente', descripcion: '',
+      github: '', pdf: '', drive: '', equipoNombre: ''
     });
+  };
 
-    const cambioInput = (e) => {
-        const { name, value } = e.target;
-        setformulario({
-            ...formulario,
-            [name]: value
-        });
-    };
+  return (
+    <Card className="shadow-sm border-0 mb-5 rounded-4">
+      <Card.Body className="p-4 p-md-5">
+        
+        <h4 className="fw-bold mb-4" style={{ color: '#8A2BE2' }}>
+          Agregar Nuevo Proyecto
+        </h4>
 
-    const { titulo, categoria, estado, descripcionExtendida, github, pdf, drive, equipoNombre } = formulario;
+        <Form onSubmit={manejarEnvio}>
+          
+          <Row className="g-3 mb-3">
+            <Col xs={12} md={5}>
+              <Form.Control 
+                type="text" 
+                placeholder="Título del proyecto" 
+                name="titulo"
+                value={formulario.titulo}
+                onChange={manejarCambio}
+                required
+                className="py-2"
+              />
+            </Col>
+            <Col xs={12} md={4}>
+              <Form.Control 
+                type="text" 
+                placeholder="Categoría (Ej: Aplicación Web)" 
+                name="categoria"
+                value={formulario.categoria}
+                onChange={manejarCambio}
+                required
+                className="py-2"
+              />
+            </Col>
+            <Col xs={12} md={3}>
+              <Form.Select 
+                name="estado" 
+                value={formulario.estado} 
+                onChange={manejarCambio}
+                className="py-2"
+              >
+                <option value="Pendiente">Pendiente</option>
+                <option value="En Progreso">En Progreso</option>
+                <option value="Finalizado">Finalizado</option>
+              </Form.Select>
+            </Col>
+          </Row>
 
-    const manejarAgregar = (e) => {
-        e.preventDefault();
+          <Row className="g-3 mb-3">
+            <Col xs={12}>
+              <Form.Control 
+                as="textarea" 
+                rows={3} 
+                placeholder="Escribe una breve descripción del proyecto..." 
+                name="descripcion"
+                value={formulario.descripcion}
+                onChange={manejarCambio}
+                className="py-2"
+              />
+            </Col>
+          </Row>
 
-        if (titulo.trim() === '' || categoria.trim() === '') return;
+          <Row className="g-3 mb-4">
+            <Col xs={12} md={4}>
+              <Form.Control 
+                type="text" 
+                placeholder="Enlace GitHub" 
+                name="github"
+                value={formulario.github}
+                onChange={manejarCambio}
+                className="py-2"
+              />
+            </Col>
+            <Col xs={12} md={4}>
+              <Form.Control 
+                type="text" 
+                placeholder="Enlace PDF" 
+                name="pdf"
+                value={formulario.pdf}
+                onChange={manejarCambio}
+                className="py-2"
+              />
+            </Col>
+            <Col xs={12} md={4}>
+              <Form.Control 
+                type="text" 
+                placeholder="Enlace Drive" 
+                name="drive"
+                value={formulario.drive}
+                onChange={manejarCambio}
+                className="py-2"
+              />
+            </Col>
+          </Row>
 
-        const nuevoProyecto = {
-            id: Date.now(),
-            titulo,
-            categoria,
-            estado,
-            imagen: "",
-            descripcionExtendida: descripcionExtendida || "Sin descripción asignada.",
-            descripcionExtendida2: "",
-            tecnologias: ["Tecnología a definir"],
-            funcionalidades: ["Funcionalidad a definir"],
-            links: {
-                pdf: pdf || "",
-                drive: drive || "",
-                github: github || ""
-            },
-            equipo: equipoNombre
-                ? [{ nombre: equipoNombre, rol: "Líder" }]
-                : []
-        };
+          <Row className="g-3 align-items-center">
+            <Col xs={12} md={8}>
+              <Form.Control 
+                type="text" 
+                placeholder="Nombre del Integrante / Líder" 
+                name="equipoNombre"
+                value={formulario.equipoNombre}
+                onChange={manejarCambio}
+                className="py-2"
+              />
+            </Col>
+            <Col xs={12} md={4}>
+              <Button 
+                type="submit" 
+                className="w-100 fw-bold py-2 text-white"
+                style={{ backgroundColor: '#1ebf1e', border: 'none' }}
+              >
+                Agregar Proyecto
+              </Button>
+            </Col>
+          </Row>
 
-        onAgregarProyecto(nuevoProyecto);
-
-        setformulario({
-            titulo: "",
-            categoria: "",
-            estado: "Pendiente",
-            descripcionExtendida: "",
-            github: "",
-            pdf: "",
-            drive: "",
-            equipoNombre: ""
-        });
-    };
-
-
-    return (
-        <>
-            <div className={style.agregarProyecto}>
-
-                <h3 className={style.tituloH3}> Agregar Nuevo Proyecto</h3>
-
-                <form onSubmit={manejarAgregar} className={style.formulario}>
-
-                    <div className={style.contenedorCampos}>
-
-                        <input className={style.campos} type="text" name="titulo" placeholder="Título" value={titulo} onChange={cambioInput} />
-                        <input className={style.campos} type="text" name="categoria" placeholder="Categoría" value={categoria} onChange={cambioInput} />
-                        <select className={style.campos} name="estado" value={estado} onChange={cambioInput}>
-                            <option value="Pendiente">Pendiente</option>
-                            <option value="En progreso">En progreso</option>
-                            <option value="Finalizado">Finalizado</option>
-                        </select>
-
-                    </div>
-
-                    <textarea className={style.campoTarea} name="descripcionExtendida" placeholder="Escribe una breve descripción del proyecto..." value={descripcionExtendida} onChange={cambioInput} />
-
-                    <div className={style.contenedorCampos}>
-
-                        <input className={style.camposLinks} type="text" name="github" placeholder="Enlace GitHub" value={github} onChange={cambioInput} />
-                        <input className={style.camposLinks} type="text" name="pdf" placeholder="Enlace PDF" value={pdf} onChange={cambioInput} />
-                        <input className={style.camposLinks} type="text" name="drive" placeholder="Enlace Drive" value={drive} onChange={cambioInput} />
-                        <input className={style.camposLinks} type="text" name="equipoNombre" placeholder="Integrante" value={equipoNombre} onChange={cambioInput} />
-
-                        <button className={style.btnAgregar} type="submit">Agregar Proyecto</button>
-
-                    </div>
-
-                </form>
-            </div>
-        </>
-    )
-}
+        </Form>
+      </Card.Body>
+    </Card>
+  );
+};
 
 export default FormularioProyecto;
