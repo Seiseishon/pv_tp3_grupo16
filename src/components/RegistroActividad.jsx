@@ -1,3 +1,4 @@
+import { Alert } from 'react-bootstrap';  
 
 function RegistroActividad(props) {
   if (!props.fecha) return null;
@@ -14,26 +15,10 @@ function RegistroActividad(props) {
   const mensajeFormateado = `Última actualización de la lista: ${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`;
 
   return (
-    <div style={estilos.contenedor}>
-      <p style={estilos.texto}>{mensajeFormateado}</p>
-    </div>
+    <Alert variant="info"  className="mt-3">
+      {mensajeFormateado}
+    </Alert>
   );
 }
-
-const estilos = {
-  contenedor: {
-    marginTop: '20px',
-    padding: '10px',
-    backgroundColor: '#f0f4f8',
-    borderLeft: '4px solid #0076ff',
-    borderRadius: '4px',
-  },
-  texto: {
-    margin: 0,
-    color: '#333',
-    fontWeight: '500',
-    fontSize: '14px',
-  }
-};
 
 export default RegistroActividad;
