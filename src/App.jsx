@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import Dashboard from "./pages/Dashboard";
 import ListasProyectosPages from "./pages/ListasProyectosPages";
 import DetallesProyectoPages from "./pages/DetallesProyectoPages";
-import PerfilPages from "./pages/PerfilPages";
+import Perfil from "./pages/Perfil";
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/proyectos" element={<ListasProyectosPages />} />
         <Route path="/proyectos/:id" element={<DetallesProyectoPages />} />
-        <Route path="/perfil" element={<PerfilPages />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
 
       <Footer />
