@@ -8,7 +8,7 @@ const Header = () => {
       <Container className="text-center">
         
         <div className="mb-3">
-          <i class="fa-regular fa-clipboard" style={{ fontSize: '3.5rem', color: '#8A2BE2' }}></i>
+          <i className="fa-regular fa-clipboard" style={{ fontSize: '3.5rem', color: '#8A2BE2' }}></i>
         </div>
 
         <h1 className="display-5 text-white fw-bold mb-3 mt-2">

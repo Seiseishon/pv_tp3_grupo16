@@ -1,5 +1,6 @@
 import { Card, Button, Badge } from 'react-bootstrap';
 import styles from '../css/ProyectoCard.module.css';
+import { Link } from 'react-router-dom';
 
 const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle }) => {
   return (
@@ -30,8 +31,9 @@ const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle }) => {
 
         <div className="d-grid gap-2 mt-auto">
           <Button
+            as={Link}
             className={`fw-bold text-white py-2 ${styles['boton-morado']}`}
-            onClick={() => onVerDetalle(proyecto.id)}
+            to={`/proyectos/${proyecto.id}`}
           >
             Ver Detalle
           </Button>

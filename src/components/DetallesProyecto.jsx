@@ -38,7 +38,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
 
       <div className={style.tagsContenedor}>
         <span className={style.tagDetalle, style.categoria}>{categoria}</span>
-        <span className={style.tagDetalle, style.estado}>{estado}</span>
+        <span className={style.tagDetalle, style.estado}>{categoria}</span>
       </div>
 
       <hr className={style.linea} />
