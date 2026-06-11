@@ -1,10 +1,16 @@
+import React from 'react';
+import { Badge, Container } from 'react-bootstrap';
 import style from '../css/DetallesProyecto.module.css';
 import Boton from './Boton';
 
 const DetallesProyecto = ({ proyecto, alVolver }) => {
 
   if (!proyecto) {
-    return <div className="detalle-proyecto-page"><p>Cargando datos del proyecto...</p></div>;
+    return (
+      <div className="detalle-proyecto-page">
+        <p>Cargando datos del proyecto...</p>
+      </div>
+    );
   }
 
   const {
@@ -24,7 +30,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
   const desc2 = descripcionExtendida2 || "";
 
   return (
-    <div className={style.detalleProyectoPage}>
+    <Container className={`${style.detalleProyectoPage} mt-4 mb-5`}>
 
       <Boton alVolver={alVolver} />
 
@@ -36,9 +42,9 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </div>
       )}
 
-      <div className={style.tagsContenedor}>
-        <span className={style.tagDetalle, style.categoria}>{categoria}</span>
-        <span className={style.tagDetalle, style.estado}>{categoria}</span>
+      <div className="mb-3 d-flex gap-2">
+        <Badge bg="secondary" style={{ backgroundColor: '#8A2BE2', padding: '8px 12px' }}>{categoria}</Badge>
+        <Badge bg={estado === 'Finalizado' ? 'success' : 'warning'} style={{ padding: '8px 12px' }}>{estado}</Badge>
       </div>
 
       <hr className={style.linea} />
@@ -47,6 +53,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
       <p className={style.parrafoDetalle}>{desc1}</p>
       {desc2 && <p className={style.parrafoDetalle}>{desc2}</p>}
 
+      {/* Mapeo dinámico de Tecnologías */}
       {tecnologias && tecnologias.length > 0 && (
         <>
           <h3 className={style.tituloH3}>Tecnologías Aplicadas</h3>
@@ -58,6 +65,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </>
       )}
 
+      {/* Mapeo dinámico de Funcionalidades */}
       {funcionalidades && funcionalidades.length > 0 && (
         <>
           <h3 className={style.tituloH3}>Funcionalidades Clave</h3>
@@ -69,6 +77,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </>
       )}
 
+      {/* Enlaces externos */}
       <h3 className={style.tituloH3}>Recursos del Proyecto</h3>
       <ul className={style.detalleListaTech}>
         <li>
@@ -85,6 +94,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </li>
       </ul>
 
+      {/* Listado dinámico del equipo mediante el uso de .map() como pide el enunciado */}
       <h3 className={style.tituloH3}>Equipo de Trabajo</h3>
       <ul className={style.detalleListaKey}>
         {equipo && equipo.length > 0 ? (
@@ -98,7 +108,7 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         )}
       </ul>
 
-    </div>
+    </Container>
   );
 };
 
