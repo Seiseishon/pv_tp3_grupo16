@@ -12,7 +12,7 @@ const Perfil = () => {
       foto: '/fotos-equipo/noel.jpeg',
       github: 'https://github.com', 
       linkedin: 'https://linkedin.com',
-      skills: ['Css', 'React', 'JavaScrip']
+      skills: ['Css', 'React', 'JavaScript']
     },
     { 
       id: 2, 

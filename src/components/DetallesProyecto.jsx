@@ -53,7 +53,6 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
       <p className={style.parrafoDetalle}>{desc1}</p>
       {desc2 && <p className={style.parrafoDetalle}>{desc2}</p>}
 
-      {/* Mapeo dinámico de Tecnologías */}
       {tecnologias && tecnologias.length > 0 && (
         <>
           <h3 className={style.tituloH3}>Tecnologías Aplicadas</h3>
@@ -65,7 +64,6 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </>
       )}
 
-      {/* Mapeo dinámico de Funcionalidades */}
       {funcionalidades && funcionalidades.length > 0 && (
         <>
           <h3 className={style.tituloH3}>Funcionalidades Clave</h3>
@@ -77,7 +75,6 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </>
       )}
 
-      {/* Enlaces externos */}
       <h3 className={style.tituloH3}>Recursos del Proyecto</h3>
       <ul className={style.detalleListaTech}>
         <li>
@@ -94,7 +91,6 @@ const DetallesProyecto = ({ proyecto, alVolver }) => {
         </li>
       </ul>
 
-      {/* Listado dinámico del equipo mediante el uso de .map() como pide el enunciado */}
       <h3 className={style.tituloH3}>Equipo de Trabajo</h3>
       <ul className={style.detalleListaKey}>
         {equipo && equipo.length > 0 ? (

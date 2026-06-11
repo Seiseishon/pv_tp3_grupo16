@@ -30,10 +30,13 @@ const Dashboard = () => {
           <i className="fas fa-plus me-2"></i> Ver / Crear Proyecto
         </Button>
       </div>
-
       <Row className="g-4 mb-5">
+        
         <Col xs={12} md={4}>
-          <Card className={`h-100 border-0 shadow-sm rounded-4 ${style.tarjetaAnimada}`}>
+          <Card 
+            className={`h-100 border-0 shadow-sm rounded-4 ${style.tarjetaAnimada}`}
+            onClick={() => navigate('/proyectos', { state: { filtroEstado: 'Pendiente' } })}
+          >
             <Card.Body className="d-flex align-items-center">
               <div className="bg-warning bg-opacity-10 text-warning p-3 rounded-3 me-3 fs-3">
                 <i className="fas fa-clipboard-list"></i>
@@ -45,9 +48,11 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col>
-
         <Col xs={12} md={4}>
-          <Card className={`h-100 border-0 shadow-sm rounded-4 ${style.tarjetaAnimada}`}>
+          <Card 
+            className={`h-100 border-0 shadow-sm rounded-4 ${style.tarjetaAnimada}`}
+            onClick={() => navigate('/proyectos', { state: { filtroEstado: 'En Progreso' } })}
+          >
             <Card.Body className="d-flex align-items-center">
               <div className="bg-primary bg-opacity-10 text-primary p-3 rounded-3 me-3 fs-3">
                 <i className="fas fa-spinner fa-spin-pulse"></i>
@@ -59,9 +64,11 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col>
-
         <Col xs={12} md={4}>
-          <Card className={`h-100 border-0 shadow-sm rounded-4 ${style.tarjetaAnimada}`}>
+          <Card 
+            className={`h-100 border-0 shadow-sm rounded-4 ${style.tarjetaAnimada}`}
+            onClick={() => navigate('/proyectos', { state: { filtroEstado: 'Finalizado' } })}
+          >
             <Card.Body className="d-flex align-items-center">
               <div className="bg-success bg-opacity-10 text-success p-3 rounded-3 me-3 fs-3">
                 <i className="fas fa-check-circle"></i>
@@ -76,7 +83,6 @@ const Dashboard = () => {
       </Row>
 
       <Row className="g-4">
-        
         <Col xs={12} lg={8}>
           <Card className="border-0 shadow-sm rounded-4 h-100">
             <Card.Header className="bg-white border-0 pt-4 pb-0 px-4">
@@ -84,29 +90,39 @@ const Dashboard = () => {
                 <i className="fas fa-bell me-2" style={{ color: '#8A2BE2' }}></i> Últimas Novedades
               </h5>
             </Card.Header>
-            <Card.Body className="p-4">
+            <Card.Body className="p-3">
               <ListGroup variant="flush">
-                <ListGroup.Item className="px-0 py-3 d-flex align-items-start border-bottom">
-                  <Badge bg="success" className="me-3 mt-1 px-2 py-2 rounded-circle"> </Badge>
+                <ListGroup.Item className={`px-3 py-3 border-bottom-0 d-flex align-items-start ${style.novedadItem || ''}`}>
+                  <div 
+                    className={`bg-success rounded-circle me-3 mt-1 ${style.latido || ''}`} 
+                    style={{ width: '12px', height: '12px', minWidth: '12px' }}
+                  ></div>
                   <div>
                     <p className="mb-0 fw-semibold text-dark">Se finalizaron los proyectos pendientes</p>
                     <small className="text-muted">Hace 2 horas</small>
                   </div>
                 </ListGroup.Item>
-                <ListGroup.Item className="px-0 py-3 d-flex align-items-start border-bottom">
-                  <Badge bg="info" className="me-3 mt-1 px-2 py-2 rounded-circle"> </Badge>
+                <ListGroup.Item className={`px-3 py-3 border-bottom-0 d-flex align-items-start ${style.novedadItem || ''}`}>
+                  <div 
+                    className="bg-info rounded-circle me-3 mt-1" 
+                    style={{ width: '12px', height: '12px', minWidth: '12px' }}
+                  ></div>
                   <div>
                     <p className="mb-0 fw-semibold text-dark">Noel finalizó el apartado "Mi perfil"</p>
                     <small className="text-muted">Hoy a las 10:30 AM</small>
                   </div>
                 </ListGroup.Item>
-                <ListGroup.Item className="px-0 py-3 d-flex align-items-start">
-                  <Badge bg="warning" className="me-3 mt-1 px-2 py-2 rounded-circle"> </Badge>
+                <ListGroup.Item className={`px-3 py-3 border-bottom-0 d-flex align-items-start ${style.novedadItem || ''}`}>
+                  <div 
+                    className="bg-warning rounded-circle me-3 mt-1" 
+                    style={{ width: '12px', height: '12px', minWidth: '12px' }}
+                  ></div>
                   <div>
                     <p className="mb-0 fw-semibold text-dark">Cambios en la estructura del entorno ("detalles")</p>
                     <small className="text-muted">Ayer</small>
                   </div>
                 </ListGroup.Item>
+
               </ListGroup>
             </Card.Body>
           </Card>
