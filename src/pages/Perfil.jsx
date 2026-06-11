@@ -12,7 +12,7 @@ const Perfil = () => {
       foto: '/fotos-equipo/noel.jpeg',
       github: 'https://github.com', 
       linkedin: 'https://linkedin.com',
-      skills: ['Java', 'java', 'Java']
+      skills: ['Css', 'React', 'JavaScrip']
     },
     { 
       id: 2, 
@@ -23,7 +23,7 @@ const Perfil = () => {
       foto: '/fotos-equipo/nelson.jpeg',
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
-      skills: ['Java', 'java', 'Java']
+      skills: ['C++', 'java', 'Python']
     },
     { 
       id: 3, 
@@ -45,7 +45,7 @@ const Perfil = () => {
       foto: '/fotos-equipo/sergio.jpg',
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
-      skills: ['Java', 'java', 'Java']
+      skills: ['Angular', 'MySQL', 'Css']
     },
     { 
       id: 5, 

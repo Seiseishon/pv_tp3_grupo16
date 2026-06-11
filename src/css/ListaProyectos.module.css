@@ -165,7 +165,6 @@
     transition: all 0.3s ease;
 }
 
-/* Efecto iluminado cuando haces clic para escribir */
 .inputBuscador:focus {
     outline: none;
     background-color: #ffffff;
@@ -179,4 +178,14 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 20px;
+}
+
+.tarjetaAnimada {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.tarjetaAnimada:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(138, 43, 226, 0.15) !important; 
 }
