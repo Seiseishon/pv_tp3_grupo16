@@ -1,168 +1,139 @@
 import { useState } from 'react';
-import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 
 const FormularioProyecto = ({ onAgregarProyecto }) => {
-  const [formulario, setFormulario] = useState({
-    titulo: '',
-    categoria: '',
-    estado: 'Pendiente',
-    descripcion: '',
-    github: '',
-    pdf: '',
-    drive: '',
-    equipoNombre: ''
-  });
-
-  const manejarCambio = (e) => {
-    setFormulario({ ...formulario, [e.target.name]: e.target.value });
-  };
+  const [titulo, setTitulo] = useState('');
+  const [categoria, setCategoria] = useState('');
+  const [estado, setEstado] = useState('Pendiente');
+  const [integrantes, setIntegrantes] = useState('');
+  const [recursos, setRecursos] = useState('');  
+  const [descripcion, setDescripcion] = useState('');
 
   const manejarEnvio = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     
-    if (!formulario.titulo.trim() || !formulario.categoria.trim()) return;
+    if (!titulo.trim() || !categoria.trim()) return;
 
     const nuevoProyecto = {
-      id: Date.now(),
-      titulo: formulario.titulo,
-      categoria: formulario.categoria,
-      estado: formulario.estado,
-      descripcion: formulario.descripcion,
-      links: {
-        github: formulario.github,
-        pdf: formulario.pdf,
-        drive: formulario.drive
-      },
-      equipo: formulario.equipoNombre ? [{ nombre: formulario.equipoNombre, rol: "Líder" }] : []
+      titulo,
+      categoria,
+      estado,
+      integrantes,
+      recursos,
+      descripcion
     };
 
     onAgregarProyecto(nuevoProyecto);
 
-    setFormulario({
-      titulo: '', categoria: '', estado: 'Pendiente', descripcion: '',
-      github: '', pdf: '', drive: '', equipoNombre: ''
-    });
+    setTitulo('');
+    setCategoria('');
+    setEstado('Pendiente');
+    setIntegrantes('');
+    setRecursos('');
+    setDescripcion('');
   };
 
   return (
-    <Card className="shadow-sm border-0 mb-5 rounded-4">
-      <Card.Body className="p-4 p-md-5">
-        
-        <h4 className="fw-bold mb-4" style={{ color: '#8A2BE2' }}>
-          Agregar Nuevo Proyecto
-        </h4>
+    <div className="mb-4">
+      <h4 className="fw-bold mb-4" style={{ color: "#8A2BE2", fontSize: "1.2rem" }}>
+        <i className="fas fa-plus-circle me-2"></i> Agregar Nuevo Proyecto
+      </h4>
 
-        <Form onSubmit={manejarEnvio}>
+      <Form onSubmit={manejarEnvio}>
+        
+        <Row className="g-3 mb-3">
+          <Col md={4}>
+            <Form.Group controlId="formTitulo">
+              <Form.Control
+                type="text"
+                placeholder="Título del proyecto"
+                className="shadow-none border-secondary-subtle"
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
           
-          <Row className="g-3 mb-3">
-            <Col xs={12} md={5}>
-              <Form.Control 
-                type="text" 
-                placeholder="Título del proyecto" 
-                name="titulo"
-                value={formulario.titulo}
-                onChange={manejarCambio}
+          <Col md={4}>
+            <Form.Group controlId="formCategoria">
+              <Form.Control
+                type="text"
+                placeholder="Categoría (Ej: Aplicación Web)"
+                className="shadow-none border-secondary-subtle"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
                 required
-                className="py-2"
               />
-            </Col>
-            <Col xs={12} md={4}>
-              <Form.Control 
-                type="text" 
-                placeholder="Categoría (Ej: Aplicación Web)" 
-                name="categoria"
-                value={formulario.categoria}
-                onChange={manejarCambio}
-                required
-                className="py-2"
-              />
-            </Col>
-            <Col xs={12} md={3}>
-              <Form.Select 
-                name="estado" 
-                value={formulario.estado} 
-                onChange={manejarCambio}
-                className="py-2"
+            </Form.Group>
+          </Col>
+
+          <Col md={4}>
+            <Form.Group controlId="formEstado">
+              <Form.Select
+                className="shadow-none border-secondary-subtle text-muted"
+                value={estado}
+                onChange={(e) => setEstado(e.target.value)}
               >
                 <option value="Pendiente">Pendiente</option>
                 <option value="En Progreso">En Progreso</option>
                 <option value="Finalizado">Finalizado</option>
               </Form.Select>
-            </Col>
-          </Row>
+            </Form.Group>
+          </Col>
+        </Row>
 
-          <Row className="g-3 mb-3">
-            <Col xs={12}>
-              <Form.Control 
-                as="textarea" 
-                rows={3} 
-                placeholder="Escribe una breve descripción del proyecto..." 
-                name="descripcion"
-                value={formulario.descripcion}
-                onChange={manejarCambio}
-                className="py-2"
+        <Row className="g-3 mb-3">
+          <Col md={6}>
+            <Form.Group controlId="formIntegrantes">
+              <Form.Control
+                type="text"
+                placeholder="Integrantes asignados (Ej: Noel, Nelson)"
+                className="shadow-none border-secondary-subtle"
+                value={integrantes}
+                onChange={(e) => setIntegrantes(e.target.value)}
               />
-            </Col>
-          </Row>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId="formRecursos">
+              <Form.Control
+                type="text"
+                placeholder="Enlaces/Recursos (Ej: Link de GitHub o Figma)"
+                className="shadow-none border-secondary-subtle"
+                value={recursos}
+                onChange={(e) => setRecursos(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-          <Row className="g-3 mb-4">
-            <Col xs={12} md={4}>
-              <Form.Control 
-                type="text" 
-                placeholder="Enlace GitHub" 
-                name="github"
-                value={formulario.github}
-                onChange={manejarCambio}
-                className="py-2"
+        <Row className="g-3 mb-4">
+          <Col md={12}>
+            <Form.Group controlId="formDescripcion">
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Escribe una breve descripción del proyecto..."
+                className="shadow-none border-secondary-subtle"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
               />
-            </Col>
-            <Col xs={12} md={4}>
-              <Form.Control 
-                type="text" 
-                placeholder="Enlace PDF" 
-                name="pdf"
-                value={formulario.pdf}
-                onChange={manejarCambio}
-                className="py-2"
-              />
-            </Col>
-            <Col xs={12} md={4}>
-              <Form.Control 
-                type="text" 
-                placeholder="Enlace Drive" 
-                name="drive"
-                value={formulario.drive}
-                onChange={manejarCambio}
-                className="py-2"
-              />
-            </Col>
-          </Row>
+            </Form.Group>
+          </Col>
+        </Row>
 
-          <Row className="g-3 align-items-center">
-            <Col xs={12} md={8}>
-              <Form.Control 
-                type="text" 
-                placeholder="Nombre del Integrante / Líder" 
-                name="equipoNombre"
-                value={formulario.equipoNombre}
-                onChange={manejarCambio}
-                className="py-2"
-              />
-            </Col>
-            <Col xs={12} md={4}>
-              <Button 
-                type="submit" 
-                className="w-100 fw-bold py-2 text-white"
-                style={{ backgroundColor: '#1ebf1e', border: 'none' }}
-              >
-                Agregar Proyecto
-              </Button>
-            </Col>
-          </Row>
-
-        </Form>
-      </Card.Body>
-    </Card>
+        <div className="text-end">
+          <Button
+            type="submit"
+            style={{ backgroundColor: "#8A2BE2", border: "none" }}
+            className="px-4 fw-semibold shadow-sm"
+          >
+            <i className="fas fa-save me-2"></i> Guardar Proyecto
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 };
 

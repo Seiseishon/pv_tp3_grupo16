@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import Dashboard from "./pages/Dashboard";
-import ListasProyectosPages from "./pages/ListasProyectosPages";
-import DetallesProyectoPages from "./pages/DetallesProyectoPages";
-import Perfil from "./pages/Perfil";
-
+import Dashboard from "./Views/Dashboard";
+import Perfil from "./Views/Perfil";
+import ListaProyectos from "./Views/ListaProyectos";
+import DetallesProyecto from "./Views/DetallesProyecto";
 
 function App() {
   return (
@@ -17,8 +15,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/proyectos" element={<ListasProyectosPages />} />
-        <Route path="/proyectos/:id" element={<DetallesProyectoPages />} />
+        
+        <Route path="/proyectos" element={<ListaProyectos />} />
+        <Route path="/proyectos/:id" element={<DetallesProyecto />} />
+        
         <Route path="/perfil" element={<Perfil />} />
       </Routes>
 

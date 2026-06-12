@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap'; 
 import style from '../css/ListaProyectos.module.css';
 import proyectoService from '../services/proyectoService';
-import ProyectoCard from './ProyectoCard';
-import FormularioProyecto from './FormularioProyecto';
-import RegistroActividad from './RegistroActividad';
-import { Container, Row, Col, Button } from 'react-bootstrap';
 
-const ListaProyectos = ({ alSeleccionarProyecto }) => {
+import ProyectoCard from '../components/ProyectoCard';
+import FormularioProyecto from '../components/FormularioProyecto';
+import RegistroActividad from '../components/RegistroActividad';
+
+const ListaProyectos = () => {
   const location = useLocation();
   const filtroInicial = location.state?.filtroEstado || 'Todos';
   const [filtroActual, setFiltroActual] = useState(filtroInicial);
@@ -31,9 +32,7 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
       primerRender.current = false;
       return;
     }
-    const fechaActual = new Date();
-    setFechaRegistro(fechaActual);
-    console.log("Se detectó un cambio en proyectos. Fecha capturada:", fechaActual);
+    setFechaRegistro(new Date());
   }, [proyectos]);
 
   const agregarProyecto = (nuevoProyecto) => {
@@ -48,7 +47,6 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
 
   const manejarBusqueda = (e) => {
     const texto = e.target.value.toLowerCase();
-    
     let base = proyectoService.obtenerProyectos();
     if (filtroActual !== 'Todos') {
       base = base.filter(p => p.estado === filtroActual);
@@ -67,9 +65,10 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
   };
 
   return (
-    <>
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2 className={style.tituloProyectos}>Listado de Proyectos</h2>
+    <Container className="py-4">
+      
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className={style.tituloProyectos || ''}>Listado de Proyectos</h2>
         
         {filtroActual !== 'Todos' && (
           <Button variant="outline-secondary" size="sm" onClick={limpiarFiltro}>
@@ -78,24 +77,25 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
         )}
       </div>
 
-      <FormularioProyecto onAgregarProyecto={agregarProyecto} />
+      <Card className="border-0 shadow-sm rounded-4 p-4 mb-4">
+        <FormularioProyecto onAgregarProyecto={agregarProyecto} />
+      </Card>
 
-      <hr />
-
-      <div className={style.buscador}>
+      <div className={`mb-4 d-flex justify-content-center ${style.buscador || ''}`}>
         <input
-          className={style.inputBuscador}
+          className="form-control shadow-sm"
+          style={{ maxWidth: '600px', borderRadius: '20px', padding: '10px 20px' }}
           type="text"
           placeholder="Buscar proyecto por título..."
           onChange={manejarBusqueda}
         />
       </div>
 
-      <Container className="mt-4 mb-5">
+      <div className="mt-4 mb-5">
         {proyectosFiltrados.length === 0 ? (
           <div className="text-center text-muted py-4">
              <i className="fas fa-folder-open fs-2 mb-2 opacity-50"></i>
-             <p>No se encontraron proyectos en esta categoría.</p>
+             <p>No se encontraron proyectos.</p>
           </div>
         ) : (
           <Row className="g-4">
@@ -104,18 +104,16 @@ const ListaProyectos = ({ alSeleccionarProyecto }) => {
                 <ProyectoCard
                   proyecto={proyecto}
                   onEliminar={eliminarProyecto}
-                  onVerDetalle={alSeleccionarProyecto}
                 />
               </Col>
             ))}
           </Row>
         )}
-      </Container>
+      </div>
       
-      <hr/>
-
       {fechaRegistro && (<RegistroActividad fecha={fechaRegistro}/>)}
-    </>
+      
+    </Container>
   );
 };
 
