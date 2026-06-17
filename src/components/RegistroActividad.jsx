@@ -1,39 +1,40 @@
+import React from 'react';
+import { Alert } from 'react-bootstrap';
 
-function RegistroActividad(props) {
-  if (!props.fecha) return null;
+const RegistroActividad = ({ fecha }) => {
+  if (!fecha) return null;
 
-  const fechaObjeto = new Date(props.fecha);
-
-  const dia = String(fechaObjeto.getDate()).padStart(2, '0');
-  const mes = String(fechaObjeto.getMonth() + 1).padStart(2, '0');
-  const anio = fechaObjeto.getFullYear();
-
-  const horas = String(fechaObjeto.getHours()).padStart(2, '0');
-  const minutos = String(fechaObjeto.getMinutes()).padStart(2, '0');
-
-  const mensajeFormateado = `Última actualización de la lista: ${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`;
+  const opciones = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  };
+  const fechaFormateada = fecha.toLocaleDateString('es-AR', opciones);
 
   return (
-    <div style={estilos.contenedor}>
-      <p style={estilos.texto}>{mensajeFormateado}</p>
-    </div>
+    <Alert 
+      className="d-flex align-items-center shadow-sm rounded-4 mt-4 border-0" 
+      style={{ 
+        backgroundColor: 'rgba(138, 43, 226, 0.08)',
+        color: '#333', 
+        borderLeft: '5px solid #8A2BE2'
+      }}
+    >
+      <div className="fs-3 me-3" style={{ color: '#8A2BE2' }}>
+        <i className="fas fa-history"></i>
+      </div>
+      <div>
+        <h6 className="mb-1 fw-bold" style={{ color: '#8A2BE2' }}>Registro de Actividad del Sistema</h6>
+        <p className="mb-0 text-muted" style={{ fontSize: '0.9rem' }}>
+          Última modificación detectada en la base de proyectos el <strong>{fechaFormateada}</strong>.
+        </p>
+      </div>
+    </Alert>
   );
-}
-
-const estilos = {
-  contenedor: {
-    marginTop: '20px',
-    padding: '10px',
-    backgroundColor: '#f0f4f8',
-    borderLeft: '4px solid #0076ff',
-    borderRadius: '4px',
-  },
-  texto: {
-    margin: 0,
-    color: '#333',
-    fontWeight: '500',
-    fontSize: '14px',
-  }
 };
 
 export default RegistroActividad;

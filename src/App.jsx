@@ -1,44 +1,30 @@
-import { useState } from "react";
-import style from "./css/styles.module.css";
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import ListaProyectos from "./components/ListaProyectos";
-
-import DetallesProyecto from "./components/DetallesProyecto";
-
-import proyectoService from "./services/proyectoService";
-
+import Dashboard from "./Views/Dashboard";
+import Perfil from "./Views/Perfil";
+import ListaProyectos from "./Views/ListaProyectos";
+import DetallesProyecto from "./Views/DetallesProyecto";
+import { UsuarioProvider } from "./context/UsuarioContext";
 
 function App() {
-  const [proyectoActivo, setProyectoActivo] = useState(0);
-
-  const volverALista = () => setProyectoActivo(0);
-
-  const proyectoSeleccionado = proyectoActivo !== 0
-    ? proyectoService.obtenerProyectos().find(p => p.id === proyectoActivo)
-    : null;
-
   return (
-    <>
+    <UsuarioProvider>
       <Header />
       <Nav />
 
-      <main className={style.mainGlobal}>
-        {proyectoActivo === 0 && (
-          <ListaProyectos alSeleccionarProyecto={setProyectoActivo} />
-        )}
-
-        {proyectoActivo !== 0 && proyectoSeleccionado && (
-          <DetallesProyecto
-            proyecto={proyectoSeleccionado}
-            alVolver={volverALista}
-          />
-        )}
-      </main>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        
+        <Route path="/proyectos" element={<ListaProyectos />} />
+        <Route path="/proyectos/:id" element={<DetallesProyecto />} />
+        
+        <Route path="/perfil" element={<Perfil />} />
+      </Routes>
 
       <Footer />
-    </>
+    </UsuarioProvider>
   );
 }
 

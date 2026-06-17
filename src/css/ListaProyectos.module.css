@@ -1,3 +1,69 @@
+.mainGlobal {
+    max-width: 1200px;
+    width: 95%;
+    margin: -60px auto 50px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border-top: 8px solid #8A2BE2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.mainGlobal p {
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.mainGlobal img {
+    display: block;
+    max-width: 100%;
+    width: 280px;
+    margin: 0 auto 50px auto;
+}
+
+.mainGlobal ul {
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+.mainGlobal ul li {
+    margin-bottom: 10px;
+}
+
+.mainGlobal a {
+    color: #8A2BE2;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.mainGlobal a:hover {
+    color: #4B0082;
+    text-decoration: underline;
+}
+
+.mainGlobal .integrantes {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 5px solid #8A2BE2;
+}
+
+.mainGlobal section h3 {
+    margin-top: 0;
+    color: #222;
+}
+
+.mainGlobal section ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
 .tituloProyectos {
     margin-bottom: 20px;
 }
@@ -74,7 +140,7 @@
 }
 
 .btnAgregar:hover {
-  opacity: 0.85;
+    opacity: 0.85;
 }
 
 .buscador {
@@ -82,7 +148,7 @@
     justify-content: center;
     margin: 25px 0 35px 0;
     width: 100%;
-    margin-top: 20px; 
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -99,7 +165,6 @@
     transition: all 0.3s ease;
 }
 
-/* Efecto iluminado cuando haces clic para escribir */
 .inputBuscador:focus {
     outline: none;
     background-color: #ffffff;
@@ -113,4 +178,42 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 20px;
+}
+
+.tarjetaAnimada {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.tarjetaAnimada:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(138, 43, 226, 0.15) !important; 
+}
+
+.novedadItem {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.novedadItem:hover {
+  background-color: #f8f9fa;
+  transform: translateX(6px); 
+}
+
+.latido {
+  animation: latidoAnimacion 2s infinite;
+}
+
+@keyframes latidoAnimacion {
+  0% {
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(25, 135, 84, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+  }
 }

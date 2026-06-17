@@ -1,11 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import style from '../css/Nav.module.css';
 
 const Nav = () => {
   return (
     <nav className={style.navHeader}>
-      <a href="/">Inicio</a>
-      <a href="#">Proyectos</a>
-      <a href="#">Perfil</a>
+      <NavLink to='/'>Inicio</NavLink>
+      <NavLink to='/proyectos'>Proyectos</NavLink>
+      <NavLink to='/perfil'>Perfil</NavLink>
     </nav>
   );
 };
