@@ -16,8 +16,8 @@ const ListaProyectos = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
   const [proyectosFiltrados, setProyectosFiltrados] = useState([]); 
   const [fechaRegistro, setFechaRegistro] = useState(null);
-
   const primerRender = useRef(true);
+
 
   useEffect(() => {
     let lista = proyectoService.obtenerProyectos();
@@ -30,7 +30,7 @@ const ListaProyectos = () => {
   useEffect(() => {
     if (primerRender.current) {
       primerRender.current = false;
-      return;
+      return; 
     }
     setFechaRegistro(new Date());
   }, [proyectos]);
