@@ -6,10 +6,11 @@ import Dashboard from "./Views/Dashboard";
 import Perfil from "./Views/Perfil";
 import ListaProyectos from "./Views/ListaProyectos";
 import DetallesProyecto from "./Views/DetallesProyecto";
+import { UsuarioProvider } from "./context/UsuarioContext";
 
 function App() {
   return (
-    <>
+    <UsuarioProvider>
       <Header />
       <Nav />
 
@@ -23,7 +24,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+    </UsuarioProvider>
   );
 }
 
